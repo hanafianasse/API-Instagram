@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>anasses's posts</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Anasse</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#">Disabled</a>
+				</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+
+		<h1 align="center" class="h1">Imstramgrame</h1>
+
+		<div id="content"></div>
+
+	</div>
+
+
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="index.js"></script>
+	
+
+<!-- 	<script type="text/javascript">
+		$.ajax({
+			method: "GET",
+			url: "/hamzaProfilPicture",
+			dataType: "json",
+		})
+		.done(function(result){
+			var image = "<figure class='figure'><img src='"+result.hamzaProfilUrl+"' class='figure-img img-fluid rounded'><figcaption class='figure-caption text-right'></figcaption></figure>";
+			$("#content").append(image);
+		})
+		.fail(function(err){
+			console.log(err);
+		});
+	</script> -->
+
+
+
+
+
+	<script type="text/javascript">
+		$.ajax({
+			method: "GET",
+			url: "/instagrame",
+			dataType: "json",
+		})
+		.done(function(result){
+			var rows = "";
+			var url1 = "";
+			var url2 = "";
+			var url3 = "";
+			var image1 = "";
+			var image2 = "";
+			var image3 = "";
+			for (var i = 0; i < result.anasseInstagrame.data.length; i += 3) {
+
+				if(result.anasseInstagrame.data[i].images.standard_resolution.url){
+					url1 = result.anasseInstagrame.data[i].images.standard_resolution.url;
+					if(result.anasseInstagrame.data[i].location){
+						position1 = result.anasseInstagrame.data[i].location.name;
+					}else{
+						position1 = "";
+					}
+				}
+				if(result.anasseInstagrame.data[i+1].images.standard_resolution.url){
+					url2 = result.anasseInstagrame.data[i+1].images.standard_resolution.url;
+					if(result.anasseInstagrame.data[i+1].location){
+						position2 = result.anasseInstagrame.data[i+1].location.name;
+					}else{
+						position2 = "";
+					}
+				}
+				if(result.anasseInstagrame.data[i+2].images.standard_resolution.url){
+					url3 = result.anasseInstagrame.data[i+2].images.standard_resolution.url;
+					if(result.anasseInstagrame.data[i+2].location){
+						position3 = result.anasseInstagrame.data[i+2].location.name;						
+					}else{
+						position3 = "";
+					}
+				}
+
+				if(url1){
+					image1 = "<figure class='figure'><img src='"+url1+"' class='figure-img img-fluid rounded'><figcaption class='figure-caption text-right'>"+position1+"</figcaption></figure>";
+				}
+				if(url2){
+					image2 = "<figure class='figure'><img src='"+url2+"' class='figure-img img-fluid rounded'><figcaption class='figure-caption text-right'>"+position2+"</figcaption></figure>";
+				}
+				if(url3){
+					image3 = "<figure class='figure'><img src='"+url3+"' class='figure-img img-fluid rounded'><figcaption class='figure-caption text-right'>"+position3+"</figcaption></figure>";
+				}
+				
+				var row = "<div class='row'>"+
+										"<div class='col'>"+image1+"</div>"+
+										"<div class='col'>"+image2+"</div>"+
+										"<div class='col'>"+image3+"</div>"+
+									"</div>";
+
+        rows += row;
+			}
+			$("#content").append(rows);
+		})
+		.fail(function(err){
+			console.log(err);
+		});
+	</script>
+</body>
+</html>
+
