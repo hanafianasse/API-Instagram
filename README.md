@@ -1,7 +1,9 @@
-<<<<<<< HEAD
-# instagrame-api-
-testing instagrame api with my one acount
-=======
 # API-Instagram
 Testing the Instagrame API
->>>>>>> 59ec13aa5858de241cfb0a9937af53691204beac
+
+To start
+1 - clone the project into your localhost
+2 - run npm install
+3 - run node index.js
+4 - go to : localhost:3000
+5 - Optional : run npm install nodemon to run server wich's restart if you change server code  
